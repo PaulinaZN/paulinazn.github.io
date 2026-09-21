@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Paulina Zúñiga Núñez — Portafolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0E1520;
+    --panel: #161F2C;
+    --panel-2: #1B2532;
+    --line: #263140;
+    --text: #E9ECEF;
+    --text-dim: #93A1B0;
+    --amber: #E8A33D;
+    --teal: #4FB0A0;
+    --mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+    --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); scroll-behavior: smooth; }
+  * { box-sizing: inherit; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.55;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 64px 64px;
+    opacity: 0.18;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .wrap { position: relative; z-index: 1; }
+
+  a { color: var(--amber); }
+
+  .container {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  nav {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 10;
+    background: rgba(14,21,32,0.88);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 58px;
+  }
+  nav .brand {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--text-dim);
+    letter-spacing: 0.02em;
+  }
+  nav .brand span { color: var(--amber); }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 22px;
+    margin: 0; padding: 0;
+  }
+  nav a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 14px;
+  }
+  nav a:hover { color: var(--text); }
+  @media (max-width: 640px) {
+    nav ul { gap: 14px; }
+    nav a { font-size: 12.5px; }
+  }
+
+  header.hero {
+    padding: 76px 0 56px;
+    border-bottom: 1px solid var(--line);
+  }
+  .eyebrow-line {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--teal);
+    margin-bottom: 18px;
+  }
+  h1.name {
+    font-size: clamp(34px, 6vw, 54px);
+    line-height: 1.08;
+    margin: 0 0 14px;
+    font-weight: 700;
+    max-width: 14ch;
+  }
+  .role {
+    font-size: clamp(17px, 2.4vw, 20px);
+    color: var(--text-dim);
+    max-width: 46ch;
+    margin: 0 0 28px;
+  }
+  .contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+    font-family: var(--mono);
+    font-size: 13px;
+  }
+  .contact-row a, .contact-row span {
+    color: var(--text-dim);
+    text-decoration: none;
+    border: 1px solid var(--line);
+    padding: 6px 11px;
+    border-radius: 3px;
+  }
+  .contact-row a:hover { border-color: var(--amber); color: var(--amber); }
+
+  section { padding: 56px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+
+  h2.section-title {
+    font-family: var(--mono);
+    font-size: 13px;
+    text-transform: none;
+    letter-spacing: 0.03em;
+    color: var(--amber);
+    margin: 0 0 22px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  h2.section-title::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  .lede {
+    max-width: 68ch;
+    color: var(--text);
+    font-size: 16.5px;
+  }
+  .lede.dim { color: var(--text-dim); }
+
+  /* Featured project */
+  .project-card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 34px;
+  }
+  .project-tag {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--teal);
+    margin-bottom: 10px;
+  }
+  .project-card h3 {
+    margin: 0 0 14px;
+    font-size: 23px;
+    line-height: 1.3;
+    max-width: 34ch;
+  }
+  .project-card p {
+    color: var(--text-dim);
+    max-width: 64ch;
+    margin: 0 0 22px;
+  }
+
+  .diagram-box {
+    background: var(--panel-2);
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    padding: 18px 14px 10px;
+    margin-bottom: 24px;
+    overflow-x: auto;
+  }
+  .diagram-box svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
+
+  .highlights {
+    list-style: none;
+    margin: 0 0 24px;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+  }
+  .highlights li {
+    display: flex;
+    gap: 10px;
+    font-size: 14.5px;
+    color: var(--text);
+  }
+  .highlights li::before {
+    content: "→";
+    color: var(--amber);
+    font-family: var(--mono);
+    flex-shrink: 0;
+  }
+
+  .chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--text-dim);
+    border: 1px solid var(--line);
+    padding: 5px 10px;
+    border-radius: 3px;
+  }
+
+  /* secondary lab */
+  .lab-row {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    padding: 20px 0;
+    border-top: 1px solid var(--line);
+  }
+  .lab-row:first-of-type { border-top: none; padding-top: 4px; }
+  .lab-icon {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--teal);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 4px 8px;
+    white-space: nowrap;
+    margin-top: 2px;
+  }
+  .lab-body h4 { margin: 0 0 6px; font-size: 16px; }
+  .lab-body p { margin: 0; color: var(--text-dim); font-size: 14.5px; max-width: 60ch; }
+
+  /* knowledge grid */
+  .knowledge-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  .k-card {
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    padding: 18px 20px;
+    background: var(--panel);
+  }
+  .k-card .k-title {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--amber);
+    margin-bottom: 8px;
+  }
+  .k-card p { margin: 0; font-size: 13.5px; color: var(--text-dim); }
+
+  /* stack */
+  .stack-groups { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(210px,1fr)); }
+  .stack-group .g-label {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+  .stack-group .chip-row .chip { color: var(--text); }
+
+  /* experience */
+  .job { padding: 18px 0; border-top: 1px solid var(--line); }
+  .job:first-of-type { border-top: none; padding-top: 0; }
+  .job-head {
+    display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 6px 16px;
+  }
+  .job-head h4 { margin: 0; font-size: 16.5px; }
+  .job-head .dates { font-family: var(--mono); font-size: 12.5px; color: var(--text-dim); }
+  .job .place { color: var(--teal); font-size: 13.5px; margin: 4px 0 8px; }
+  .job ul { margin: 0; padding-left: 18px; color: var(--text-dim); font-size: 14px; }
+  .job li { margin-bottom: 4px; }
+
+  /* education / certs */
+  .edu-grid { display: grid; gap: 14px; }
+  .edu-item {
+    display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+    border: 1px solid var(--line); border-radius: 5px; padding: 14px 18px; background: var(--panel);
+  }
+  .edu-item .e-title { font-size: 14.5px; }
+  .edu-item .e-place { color: var(--text-dim); font-size: 13px; margin-top: 3px; }
+  .edu-item .e-date { font-family: var(--mono); font-size: 12px; color: var(--teal); white-space: nowrap; }
+
+  footer {
+    padding: 50px 0 60px;
+    text-align: center;
+  }
+  footer .cta { font-size: 19px; margin-bottom: 20px; }
+  footer .contact-row { justify-content: center; }
+  footer .copyright { margin-top: 30px; font-family: var(--mono); font-size: 12px; color: var(--text-dim); }
+
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #0E1520;
+      --text: #E9ECEF;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav>
+  <div class="container">
+    <div class="brand">paulina<span>@</span>portfolio</div>
+    <ul>
+      <li><a href="#proyecto">Proyecto</a></li>
+      <li><a href="#conocimientos">Cloud</a></li>
+      <li><a href="#stack">Stack</a></li>
+      <li><a href="#experiencia">Experiencia</a></li>
+      <li><a href="#formacion">Formación</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="eyebrow-line">Técnico Nivel Superior en Informática · Cloud &amp; Full Stack</div>
+    <h1 class="name">Paulina Zúñiga Núñez</h1>
+    <p class="role">Construyo aplicaciones web completas y estoy formándome en arquitectura cloud sobre AWS — desde el despliegue de infraestructura hasta hacerla resistente a fallos.</p>
+    <div class="contact-row">
+      <a href="mailto:paulinaznunez@gmail.com">paulinaznunez@gmail.com</a>
+      <a href="tel:+56942954199">+56 9 4295 4199</a>
+      <a href="https://github.com/PaulinaZN" target="_blank" rel="noopener">github.com/PaulinaZN</a>
+      <a href="https://www.linkedin.com/in/paulinaznunez/" target="_blank" rel="noopener">linkedin.com/in/paulinaznunez</a>
+    </div>
+  </div>
+</header>
+
+<section id="sobre-mi">
+  <div class="container">
+    <h2 class="section-title">Sobre mí</h2>
+    <p class="lede">Técnico Superior en Informática con certificaciones en desarrollo Full Stack (Java, JavaScript) y actualmente en formación en Arquitectura Cloud a través de SENCE — Talento Digital. Combino conocimientos técnicos en desarrollo web, bases de datos y APIs con experiencia en atención al cliente y gestión de proyectos, lo que me permite construir soluciones centradas en las necesidades reales del usuario. Aprendo rápido, disfruto resolver problemas técnicos y tengo disponibilidad inmediata.</p>
+  </div>
+</section>
+
+<section id="proyecto">
+  <div class="container">
+    <h2 class="section-title">Proyecto destacado</h2>
+    <div class="project-card">
+      <div class="project-tag">Laboratorio — Arquitectura Cloud (AWS)</div>
+      <h3>De servidor único a arquitectura de alta disponibilidad</h3>
+      <p>Tomé una aplicación desplegada en una única instancia EC2 y la llevé a una arquitectura de alta disponibilidad con balanceo de carga, autoescalado y monitoreo activo. Validé el ciclo completo — alarma → escalado → recuperación — sometiendo la infraestructura a carga real para comprobar que respondía sola, sin intervención manual.</p>
+
+      <div class="diagram-box">
+        <svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama de arquitectura: usuarios hacia Application Load Balancer, hacia un Auto Scaling Group con instancias EC2, monitoreadas por CloudWatch, que dispara una alarma de escalado de vuelta al grupo.">
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#4FB0A0"/>
+            </marker>
+          </defs>
+
+          <!-- users -->
+          <g>
+            <circle cx="60" cy="150" r="26" fill="none" stroke="#93A1B0" stroke-width="1.5"/>
+            <text x="60" y="145" text-anchor="middle" fill="#93A1B0" font-family="IBM Plex Mono" font-size="10">tráfico</text>
+            <text x="60" y="159" text-anchor="middle" fill="#93A1B0" font-family="IBM Plex Mono" font-size="10">real</text>
+          </g>
+          <line x1="90" y1="150" x2="160" y2="150" stroke="#4FB0A0" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+          <!-- ALB -->
+          <g>
+            <rect x="162" y="118" width="120" height="64" rx="5" fill="#1B2532" stroke="#E8A33D" stroke-width="1.5"/>
+            <text x="222" y="145" text-anchor="middle" fill="#E9ECEF" font-family="IBM Plex Mono" font-size="11" font-weight="600">Application</text>
+            <text x="222" y="160" text-anchor="middle" fill="#E9ECEF" font-family="IBM Plex Mono" font-size="11" font-weight="600">Load Balancer</text>
+          </g>
+          <line x1="282" y1="135" x2="350" y2="90" stroke="#4FB0A0" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <line x1="282" y1="150" x2="350" y2="150" stroke="#4FB0A0" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <line x1="282" y1="165" x2="350" y2="210" stroke="#4FB0A0" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+          <!-- Auto scaling group box -->
+          <rect x="352" y="60" width="180" height="180" rx="6" fill="none" stroke="#263140" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <text x="442" y="52" text-anchor="middle" fill="#93A1B0" font-family="IBM Plex Mono" font-size="10">Auto Scaling Group</text>
+
+          <g>
+            <rect x="372" y="76" width="140" height="34" rx="4" fill="#1B2532" stroke="#4FB0A0" stroke-width="1.3"/>
+            <text x="442" y="97" text-anchor="middle" fill="#E9ECEF" font-family="IBM Plex Mono" font-size="10.5">EC2 · Amazon Linux</text>
+          </g>
+          <g>
+            <rect x="372" y="133" width="140" height="34" rx="4" fill="#1B2532" stroke="#4FB0A0" stroke-width="1.3"/>
+            <text x="442" y="154" text-anchor="middle" fill="#E9ECEF" font-family="IBM Plex Mono" font-size="10.5">EC2 · Amazon Linux</text>
+          </g>
+          <g>
+            <rect x="372" y="190" width="140" height="34" rx="4" fill="#1B2532" stroke="#4FB0A0" stroke-width="1.3" stroke-dasharray="3 2"/>
+            <text x="442" y="211" text-anchor="middle" fill="#93A1B0" font-family="IBM Plex Mono" font-size="10.5">+ instancia (escalado)</text>
+          </g>
+
+          <line x1="532" y1="150" x2="600" y2="150" stroke="#4FB0A0" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+          <!-- CloudWatch -->
+          <g>
+            <rect x="602" y="118" width="120" height="64" rx="5" fill="#1B2532" stroke="#E8A33D" stroke-width="1.5"/>
+            <text x="662" y="145" text-anchor="middle" fill="#E9ECEF" font-family="IBM Plex Mono" font-size="11" font-weight="600">CloudWatch</text>
+            <text x="662" y="160" text-anchor="middle" fill="#E9ECEF" font-family="IBM Plex Mono" font-size="11" font-weight="600">Alarma CPU</text>
+          </g>
+
+          <!-- feedback loop -->
+          <path d="M662,118 C662,40 442,40 442,58" fill="none" stroke="#E8A33D" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
+          <text x="552" y="34" text-anchor="middle" fill="#E8A33D" font-family="IBM Plex Mono" font-size="10">dispara escalado</text>
+
+          <text x="222" y="260" text-anchor="middle" fill="#93A1B0" font-family="IBM Plex Mono" font-size="10">1. distribuye tráfico</text>
+          <text x="442" y="260" text-anchor="middle" fill="#93A1B0" font-family="IBM Plex Mono" font-size="10">2. procesa carga</text>
+          <text x="662" y="260" text-anchor="middle" fill="#93A1B0" font-family="IBM Plex Mono" font-size="10">3. monitorea y reacciona</text>
+        </svg>
+      </div>
+
+      <ul class="highlights">
+        <li>Migración desde una única instancia EC2 hacia un Auto Scaling Group.</li>
+        <li>Configuración de un Application Load Balancer para distribuir el tráfico entre instancias.</li>
+        <li>Métricas y alarmas en CloudWatch para disparar el escalado automático según demanda.</li>
+        <li>Validación del ciclo completo — alarma → escalado → recuperación — sometiendo la infraestructura a carga real.</li>
+      </ul>
+
+      <div class="chip-row">
+        <span class="chip">AWS</span>
+        <span class="chip">EC2</span>
+        <span class="chip">Application Load Balancer</span>
+        <span class="chip">Auto Scaling</span>
+        <span class="chip">CloudWatch</span>
+      </div>
+    </div>
+
+    <div style="margin-top:26px;">
+      <div class="lab-row">
+        <div class="lab-icon">LAB</div>
+        <div class="lab-body">
+          <h4>Despliegue de instancia EC2</h4>
+          <p>Aprovisionamiento de una instancia EC2 con Amazon Linux como práctica de fundamentos de cómputo en la nube: creación, conexión y gestión básica de una máquina virtual en AWS.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="conocimientos">
+  <div class="container">
+    <h2 class="section-title">Conocimientos de arquitectura cloud</h2>
+    <p class="lede dim" style="margin-bottom:26px;">Adquiridos en el curso Fundamentos / Arquitectura Cloud (SENCE — Talento Digital, impartido por Alkemy / Pixelab), con base para certificaciones AWS Cloud Practitioner y Azure Fundamentals.</p>
+    <div class="knowledge-grid">
+      <div class="k-card">
+        <div class="k-title">Modelos de servicio y despliegue</div>
+        <p>IaaS, PaaS y SaaS; nube pública, privada, híbrida y multi-cloud.</p>
+      </div>
+      <div class="k-card">
+        <div class="k-title">Redes y conectividad</div>
+        <p>VPC/VNet, subredes públicas y privadas, gateways, Security Groups y NACLs.</p>
+      </div>
+      <div class="k-card">
+        <div class="k-title">Identidad y seguridad</div>
+        <p>Modelo de responsabilidad compartida, IAM, privilegio mínimo, MFA y cifrado en reposo/tránsito.</p>
+      </div>
+      <div class="k-card">
+        <div class="k-title">Cómputo y almacenamiento</div>
+        <p>VMs y contenedores, almacenamiento de bloque, objetos y archivos, bases de datos SQL y NoSQL gestionadas.</p>
+      </div>
+      <div class="k-card">
+        <div class="k-title">Escalabilidad y alta disponibilidad</div>
+        <p>Balanceo de carga, Auto Scaling, patrones monolíticos vs. desacoplados.</p>
+      </div>
+      <div class="k-card">
+        <div class="k-title">Serverless y mensajería</div>
+        <p>Funciones como servicio (Lambda), colas y notificaciones (SQS, SNS).</p>
+      </div>
+      <div class="k-card">
+        <div class="k-title">Infraestructura como código</div>
+        <p>Conceptos de IaC, herramientas como Terraform, CloudFormation y Ansible.</p>
+      </div>
+      <div class="k-card">
+        <div class="k-title">Monitoreo y costos</div>
+        <p>CloudWatch, CloudTrail, modelos de facturación y optimización de presupuestos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="container">
+    <h2 class="section-title">Stack técnico</h2>
+    <div class="stack-groups">
+      <div class="stack-group">
+        <div class="g-label">Lenguajes</div>
+        <div class="chip-row">
+          <span class="chip">Java</span><span class="chip">Python</span><span class="chip">JavaScript</span><span class="chip">SQL</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <div class="g-label">Backend</div>
+        <div class="chip-row">
+          <span class="chip">Node.js</span><span class="chip">Express</span><span class="chip">API REST</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <div class="g-label">Frontend</div>
+        <div class="chip-row">
+          <span class="chip">HTML5</span><span class="chip">CSS3</span><span class="chip">React</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <div class="g-label">Bases de datos</div>
+        <div class="chip-row">
+          <span class="chip">MySQL</span><span class="chip">PostgreSQL</span><span class="chip">MongoDB</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <div class="g-label">Cloud (en formación)</div>
+        <div class="chip-row">
+          <span class="chip">AWS EC2</span><span class="chip">ALB</span><span class="chip">Auto Scaling</span><span class="chip">CloudWatch</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <div class="g-label">Herramientas</div>
+        <div class="chip-row">
+          <span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">VS Code</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experiencia">
+  <div class="container">
+    <h2 class="section-title">Experiencia</h2>
+
+    <div class="job">
+      <div class="job-head"><h4>Desarrolladora en Formación</h4><span class="dates">2024 — presente</span></div>
+      <div class="place">Proyectos académicos</div>
+      <ul>
+        <li>Desarrollo de aplicaciones web Full Stack con Java, Node.js y bases de datos relacionales y no relacionales.</li>
+        <li>Diseño de interfaces de usuario e implementación de APIs REST siguiendo buenas prácticas de arquitectura backend.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head"><h4>Especialista en Atención al Cliente</h4><span class="dates">2023 — 2025</span></div>
+      <div class="place">Óptica Boutique Elisa</div>
+      <ul>
+        <li>Asesoría personalizada, evaluación de necesidades y elaboración de presupuestos.</li>
+        <li>Análisis de requerimientos y comunicación técnica efectiva con clientes.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head"><h4>Emprendedora Digital</h4><span class="dates">Periodo reciente</span></div>
+      <div class="place">E-commerce propio (Dropshipping)</div>
+      <ul>
+        <li>Fundación y operación de negocio online; gestión de marketing digital y plataforma de ventas.</li>
+        <li>Análisis de métricas de conversión para la toma de decisiones comerciales.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head"><h4>Ejecutiva Comercial</h4><span class="dates">2004 — 2007</span></div>
+      <div class="place">VTR</div>
+      <ul>
+        <li>Venta de servicios tecnológicos mediante canales presenciales y remotos.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="formacion">
+  <div class="container">
+    <h2 class="section-title">Formación y certificaciones</h2>
+    <div class="edu-grid">
+      <div class="edu-item">
+        <div><div class="e-title">Arquitectura Cloud</div><div class="e-place">SENCE — Talento Digital (Alkemy / Pixelab)</div></div>
+        <div class="e-date">may. 2026 — sept. 2026 (en curso)</div>
+      </div>
+      <div class="edu-item">
+        <div><div class="e-title">Técnico de Nivel Superior en Informática</div><div class="e-place">Instituto Profesional IPP</div></div>
+        <div class="e-date">2022 — 2025</div>
+      </div>
+      <div class="edu-item">
+        <div><div class="e-title">Bootcamp Full Stack Java</div><div class="e-place">Desafío Latam</div></div>
+        <div class="e-date">2024</div>
+      </div>
+      <div class="edu-item">
+        <div><div class="e-title">Back End Development and APIs</div><div class="e-place">freeCodeCamp</div></div>
+        <div class="e-date">oct. 2025</div>
+      </div>
+      <div class="edu-item">
+        <div><div class="e-title">Front End Development Libraries</div><div class="e-place">freeCodeCamp</div></div>
+        <div class="e-date">oct. 2025</div>
+      </div>
+      <div class="edu-item">
+        <div><div class="e-title">JavaScript Algorithms and Data Structures</div><div class="e-place">freeCodeCamp</div></div>
+        <div class="e-date">oct. 2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contacto">
+  <div class="container">
+    <div class="cta">¿Conversamos sobre una oportunidad?</div>
+    <div class="contact-row">
+      <a href="mailto:paulinaznunez@gmail.com">paulinaznunez@gmail.com</a>
+      <a href="tel:+56942954199">+56 9 4295 4199</a>
+      <a href="https://github.com/PaulinaZN" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/paulinaznunez/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div class="copyright">Paulina Zúñiga Núñez — Portafolio técnico, 2026</div>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>
