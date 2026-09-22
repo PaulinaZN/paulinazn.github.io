@@ -214,6 +214,22 @@
     flex-shrink: 0;
   }
 
+  .case-study-fields {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+    margin-top: 8px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+  .cs-field .cs-label {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--teal);
+    margin-bottom: 6px;
+  }
+  .cs-field p { margin: 0; font-size: 14px; color: var(--text); }
+
   .chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
   .chip {
     font-family: var(--mono);
@@ -348,13 +364,33 @@
 <section id="sobre-mi">
   <div class="container">
     <h2 class="section-title">Sobre mí</h2>
-    <p class="lede">Técnico Superior en Informática con certificaciones en desarrollo Full Stack (Java, JavaScript) y actualmente en formación en Arquitectura Cloud a través de SENCE — Talento Digital. Combino conocimientos técnicos en desarrollo web, bases de datos y APIs con experiencia en atención al cliente y gestión de proyectos, lo que me permite construir soluciones centradas en las necesidades reales del usuario. Aprendo rápido, disfruto resolver problemas técnicos y tengo disponibilidad inmediata.</p>
+    <p class="lede">Técnico Superior en Informática con certificaciones en desarrollo Full Stack (Java, JavaScript) y experiencia práctica en fundamentos de Arquitectura Cloud sobre AWS. Combino conocimientos técnicos en desarrollo web, bases de datos y APIs con experiencia en atención al cliente y gestión de proyectos, lo que me permite construir soluciones centradas en las necesidades reales del usuario. Aprendo rápido, disfruto resolver problemas técnicos y tengo disponibilidad inmediata.</p>
   </div>
 </section>
 
 <section id="proyecto">
   <div class="container">
-    <h2 class="section-title">Proyecto destacado</h2>
+    <h2 class="section-title">Proyectos</h2>
+    <p class="lede dim" style="margin-bottom:28px;">Tres proyectos que reflejan mi recorrido: desde una aplicación Full Stack completa, pasando por mis primeros pasos en la nube, hasta un caso de estudio de arquitectura en producción.</p>
+
+    <div class="lab-row" style="border-top:none; padding-top:0;">
+      <div class="lab-icon">WEB</div>
+      <div class="lab-body">
+        <h4>Catálogo web Full Stack</h4>
+        <p>Aplicación web completa de catálogo de productos, con frontend en React, backend en Java y persistencia de datos en PostgreSQL/SQL, aplicando arquitectura en capas y buenas prácticas de conexión a base de datos relacional. Disponible en <a href="https://github.com/PaulinaZN" target="_blank" rel="noopener">github.com/PaulinaZN</a>.</p>
+      </div>
+    </div>
+
+    <div class="lab-row">
+      <div class="lab-icon">LAB</div>
+      <div class="lab-body">
+        <h4>Despliegue de instancia EC2</h4>
+        <p>Aprovisionamiento de una instancia EC2 con Amazon Linux como práctica de fundamentos de cómputo en la nube: creación, conexión y gestión básica de una máquina virtual en AWS.</p>
+      </div>
+    </div>
+
+    <h3 style="margin:44px 0 20px; font-size:15px; font-family:var(--mono); color:var(--text-dim); font-weight:500;">Caso de estudio</h3>
+
     <div class="project-card">
       <div class="project-tag">Laboratorio — Arquitectura Cloud (AWS)</div>
       <h3>De servidor único a arquitectura de alta disponibilidad</h3>
@@ -422,7 +458,38 @@
         </svg>
       </div>
 
-      <ul class="highlights">
+      <div class="case-study-fields">
+        <div class="cs-field">
+          <div class="cs-label">Desafío principal</div>
+          <p>La aplicación original dependía de una única instancia EC2: si esa instancia fallaba o el tráfico superaba su capacidad, el servicio se caía o se degradaba, sin ningún mecanismo de recuperación automática.</p>
+        </div>
+        <div class="cs-field">
+          <div class="cs-label">Solución propuesta</div>
+          <p>Migrar de una instancia aislada a un Auto Scaling Group detrás de un Application Load Balancer, con alarmas de CloudWatch que disparan el escalado según el consumo de CPU, permitiendo que la infraestructura reaccione sola ante picos de carga o fallos.</p>
+        </div>
+        <div class="cs-field">
+          <div class="cs-label">Herramientas técnicas utilizadas</div>
+          <p>AWS EC2 (Amazon Linux), Application Load Balancer, Auto Scaling Group y Amazon CloudWatch para métricas y alarmas.</p>
+        </div>
+        <div class="cs-field">
+          <div class="cs-label">Principales aprendizajes</div>
+          <p>Entender en la práctica la diferencia entre escalar verticalmente y horizontalmente, cómo un balanceador distribuye tráfico entre instancias saludables, y cómo diseñar un ciclo de monitoreo que reacciona sin intervención manual.</p>
+        </div>
+        <div class="cs-field">
+          <div class="cs-label">Impacto</div>
+          <p>Validé de forma cualitativa que el ciclo completo funcionaba de punta a punta: al generar carga, la alarma se disparaba, se sumaban instancias nuevas al grupo y el tráfico se redistribuía automáticamente sin caídas del servicio.</p>
+        </div>
+        <div class="cs-field">
+          <div class="cs-label">Habilidades técnicas aplicadas</div>
+          <p>Arquitectura de alta disponibilidad, balanceo de carga, autoescalado, monitoreo y alertas, pensamiento en resiliencia de sistemas.</p>
+        </div>
+        <div class="cs-field">
+          <div class="cs-label">Por qué elegí este proyecto</div>
+          <p>Porque va más allá de "hacer que algo funcione": obliga a pensar en qué pasa cuando algo falla o cuando la demanda crece, que es exactamente el tipo de razonamiento que se espera de un perfil cloud, incluso junior.</p>
+        </div>
+      </div>
+
+      <ul class="highlights" style="margin-top:26px;">
         <li>Migración desde una única instancia EC2 hacia un Auto Scaling Group.</li>
         <li>Configuración de un Application Load Balancer para distribuir el tráfico entre instancias.</li>
         <li>Métricas y alarmas en CloudWatch para disparar el escalado automático según demanda.</li>
@@ -437,23 +504,13 @@
         <span class="chip">CloudWatch</span>
       </div>
     </div>
-
-    <div style="margin-top:26px;">
-      <div class="lab-row">
-        <div class="lab-icon">LAB</div>
-        <div class="lab-body">
-          <h4>Despliegue de instancia EC2</h4>
-          <p>Aprovisionamiento de una instancia EC2 con Amazon Linux como práctica de fundamentos de cómputo en la nube: creación, conexión y gestión básica de una máquina virtual en AWS.</p>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
 <section id="conocimientos">
   <div class="container">
     <h2 class="section-title">Conocimientos de arquitectura cloud</h2>
-    <p class="lede dim" style="margin-bottom:26px;">Adquiridos en el curso Fundamentos / Arquitectura Cloud (SENCE — Talento Digital, impartido por Alkemy / Pixelab), con base para certificaciones AWS Cloud Practitioner y Azure Fundamentals.</p>
+    <p class="lede dim" style="margin-bottom:26px;">Conceptos fundamentales de computación en la nube que he trabajado en formación práctica, con base para certificaciones como AWS Cloud Practitioner y Azure Fundamentals.</p>
     <div class="knowledge-grid">
       <div class="k-card">
         <div class="k-title">Modelos de servicio y despliegue</div>
@@ -547,32 +604,6 @@
         <li>Diseño de interfaces de usuario e implementación de APIs REST siguiendo buenas prácticas de arquitectura backend.</li>
       </ul>
     </div>
-
-    <div class="job">
-      <div class="job-head"><h4>Especialista en Atención al Cliente</h4><span class="dates">2023 — 2025</span></div>
-      <div class="place">Óptica Boutique Elisa</div>
-      <ul>
-        <li>Asesoría personalizada, evaluación de necesidades y elaboración de presupuestos.</li>
-        <li>Análisis de requerimientos y comunicación técnica efectiva con clientes.</li>
-      </ul>
-    </div>
-
-    <div class="job">
-      <div class="job-head"><h4>Emprendedora Digital</h4><span class="dates">Periodo reciente</span></div>
-      <div class="place">E-commerce propio (Dropshipping)</div>
-      <ul>
-        <li>Fundación y operación de negocio online; gestión de marketing digital y plataforma de ventas.</li>
-        <li>Análisis de métricas de conversión para la toma de decisiones comerciales.</li>
-      </ul>
-    </div>
-
-    <div class="job">
-      <div class="job-head"><h4>Ejecutiva Comercial</h4><span class="dates">2004 — 2007</span></div>
-      <div class="place">VTR</div>
-      <ul>
-        <li>Venta de servicios tecnológicos mediante canales presenciales y remotos.</li>
-      </ul>
-    </div>
   </div>
 </section>
 
@@ -581,16 +612,8 @@
     <h2 class="section-title">Formación y certificaciones</h2>
     <div class="edu-grid">
       <div class="edu-item">
-        <div><div class="e-title">Arquitectura Cloud</div><div class="e-place">SENCE — Talento Digital (Alkemy / Pixelab)</div></div>
-        <div class="e-date">may. 2026 — sept. 2026 (en curso)</div>
-      </div>
-      <div class="edu-item">
         <div><div class="e-title">Técnico de Nivel Superior en Informática</div><div class="e-place">Instituto Profesional IPP</div></div>
         <div class="e-date">2022 — 2025</div>
-      </div>
-      <div class="edu-item">
-        <div><div class="e-title">Bootcamp Full Stack Java</div><div class="e-place">Desafío Latam</div></div>
-        <div class="e-date">2024</div>
       </div>
       <div class="edu-item">
         <div><div class="e-title">Back End Development and APIs</div><div class="e-place">freeCodeCamp</div></div>
